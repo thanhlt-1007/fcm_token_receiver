@@ -2,10 +2,6 @@ class FirebaseMessagingSwController < ApplicationController
   skip_forgery_protection
 
   def show
-    respond_to do |format|
-      format.js do
-        render js: ""
-      end
-    end
+    @firebase_config = JSON.parse File.open("config/initializers/firebase/config.json").read
   end
 end

@@ -34,7 +34,17 @@
 
       TokenElem.innerHTML = 'Device token is : <br>' + token;
 
+      // README
       // Unregister service worker to get new token each request
+
+      // OPTION 1
+      // get new token each request
+      // uncomment
+
+      // OPTION 2
+      // test fcm_send.sh
+      // comment
+
       navigator.serviceWorker.getRegistrations().then(function(registrations) {
         for(let registration of registrations) {
           registration.unregister();
@@ -57,7 +67,7 @@
         navigator.serviceWorker
           .getRegistrations()
           .then((registration) => {
-            registration[0].showNotification(notification.title);
+            registration[0].showNotification(notification.title');
           });
       }
     });
