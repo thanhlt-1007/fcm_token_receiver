@@ -7,6 +7,8 @@
 
 <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-messaging.js"></script>
 <script>
+  console.log('load success at: ' + new Date());
+
   MsgElem = document.getElementById('msg');
   TokenElem = document.getElementById('token');
   NotisElem = document.getElementById('notis');
@@ -14,22 +16,30 @@
 
   var firebaseConfig = JSON.parse('<%= raw(@firebase_config.to_json) %>');
 
-  console.log(firebaseConfig);
-
   firebase.initializeApp(firebaseConfig);
 
   const messaging = firebase.messaging();
   messaging
     .requestPermission()
     .then(function () {
+      console.log('requestPermission success at: ' + new Date());
+
       MsgElem.innerHTML = 'Notification permission granted.';
-      console.log('Notification permission granted.');
 
       // get the token in the form of promise
       return messaging.getToken();
     })
     .then(function (token) {
+      console.log('getToken success at: ' + new Date());
+
       TokenElem.innerHTML = 'Device token is : <br>' + token;
+
+      // Unregister service worker to get new token each request
+      navigator.serviceWorker.getRegistrations().then(function(registrations) {
+        for(let registration of registrations) {
+          registration.unregister();
+        }
+      });
     })
     .catch(function (err) {
       ErrElem.innerHTML = ErrElem.innerHTML + '; ' + err;
