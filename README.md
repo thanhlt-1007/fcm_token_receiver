@@ -1,24 +1,22 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+- Create your `config/initializers/firebase/config.json`
 
-Things you may want to cover:
+- Install gem
+```
+bundle install
+```
 
-* Ruby version
+- Start rails server
+```
+rails s
+```
 
-* System dependencies
+- Access root screen
+```
+localhost:3000
+```
 
-* Configuration
+- FCM Token is display on your screen
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- Remove cookies to get new FCM token
